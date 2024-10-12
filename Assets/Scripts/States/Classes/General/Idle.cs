@@ -17,12 +17,12 @@ public class Idle : MonoBehaviour, IState
     }
     public void Enter()
     {
-        Debug.Log("Entro en Idle");
+        
     }
 
     public void Exit()
     {
-        Debug.Log("Saliste de Idle");
+        
     }
 
     public void UpdateState()
@@ -43,6 +43,11 @@ public class Idle : MonoBehaviour, IState
             if (Input.GetKeyDown(KeyCode.V))
             {
                 characterController.StateMachine.TransitionTo(characterController.StateMachine.kickingState);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                characterController.StateMachine.TransitionTo(characterController.StateMachine.jumpingState);
             }
         } else
         {

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Kicking : MonoBehaviour, IState
 {
     private GameObject m_gameObject;
-    private Leg leg;
     private CharacterController characterController;
     private EnemyController enemyController;
 
@@ -14,12 +13,10 @@ public class Kicking : MonoBehaviour, IState
         m_gameObject = gameObject;
         m_gameObject.TryGetComponent<CharacterController>(out characterController);
         m_gameObject.TryGetComponent<EnemyController>(out enemyController);
-        leg = characterController.gameObject.GetComponentInChildren<Leg>(true);
     }
     public void Enter()
     {
-        Debug.Log("Entro en Punching");
-        leg.Attack();
+        Debug.Log("Entro en Kicking");
     }
 
     public void Exit()
@@ -29,9 +26,6 @@ public class Kicking : MonoBehaviour, IState
 
     public void UpdateState()
     {
-        if (!leg.IsAttacking)
-        {
-            characterController.StateMachine.TransitionTo(characterController.StateMachine.idleState);
-        }
+
     }
 }

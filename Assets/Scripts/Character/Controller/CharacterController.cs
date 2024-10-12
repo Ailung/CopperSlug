@@ -5,21 +5,22 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private int speed = 3;
-    [SerializeField] private GameObject hand;
-    [SerializeField] private GameObject foot;
+    [SerializeField] private int jumpIntensity = 3;
+
     private bool isFacingRight = true;
     private StateMachine playerStateMachine;
+    private Rigidbody2D rb;
+    private MeshRenderer mr;
+    private IWeapon weapon;
 
     private float horizontal;
     private float vertical;
 
     public StateMachine StateMachine => playerStateMachine;
-
-    private Rigidbody2D rb;
-
     public Rigidbody2D Rb => rb;
+    public int JumpIntentisy => jumpIntensity;
 
-    private MeshRenderer mr;
+    
 
     private void Awake()
     {
@@ -37,19 +38,6 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EnemyWeapon"))
-        {
-
-            if (collision.TryGetComponent<Hands>(out Hands hands))
-            {
-                this.GetComponent<HealthManager>().getDamage(hands.AttackDamage);
-            }
-            if (collision.TryGetComponent<Leg>(out Leg leg))
-            {
-                this.GetComponent<HealthManager>().getDamage(leg.AttackDamage);
-            }
-
-        }
         if (collision.CompareTag("Drop"))
         {
 
@@ -61,10 +49,17 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            StateMachine.TransitionTo(StateMachine.idleState);
+        }
+    }
+
     private void FixedUpdate()
     {
         float inputHorizontal = Input.GetAxis("Horizontal");
-        float inputVertical = Input.GetAxis("Vertical");
 
         if (inputHorizontal < 0 && isFacingRight)
         {
@@ -76,6 +71,8 @@ public class CharacterController : MonoBehaviour
             isFacingRight = true;
         }
 
-        rb.velocity = new Vector2(inputHorizontal * speed, inputVertical * speed);
+        rb.velocity = new Vector2(inputHorizontal * speed, rb.velocity.y);
+
+        Debug.Log(StateMachine.CurrentState.GetType().Name);
     }
 }

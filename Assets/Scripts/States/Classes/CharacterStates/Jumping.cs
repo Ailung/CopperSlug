@@ -2,16 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jumping : MonoBehaviour
+public class Jumping : MonoBehaviour, IState
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private GameObject m_gameObject;
+    private CharacterController characterController;
+
+    public Jumping(GameObject gameObject)
+    {
+        m_gameObject = gameObject;
+        m_gameObject.TryGetComponent<CharacterController>(out characterController);
+    }
+    public void Enter()
+    {
+        characterController.Rb.AddForce(new Vector2(0,1*characterController.JumpIntentisy),ForceMode2D.Impulse);
+    }
+
+    public void Exit()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateState()
     {
         
     }

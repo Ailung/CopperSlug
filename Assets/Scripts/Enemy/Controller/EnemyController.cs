@@ -10,8 +10,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float stopDistance;
     private float playerDistance;
 
-    [SerializeField] private GameObject hand;
-    [SerializeField] private GameObject foot;
     [SerializeField] private CharacterController player;
     private bool isFacingRight = false;
     private StateMachine enemyStateMachine;
@@ -39,19 +37,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("CharacterWeapon"))
-        {
-
-            if (collision.TryGetComponent<Hands>(out Hands hands))
-            {
-                this.GetComponent<HealthManager>().getDamage(hands.AttackDamage);
-            }
-            if (collision.TryGetComponent<Leg>(out Leg leg))
-            {
-                this.GetComponent<HealthManager>().getDamage(leg.AttackDamage);
-            }
-
-        }
+        
     }
 
     void Update()
@@ -70,7 +56,7 @@ public class EnemyController : MonoBehaviour
     private void StopChasePlayer()
     {
         
-        hand.GetComponent<Hands>().Attack();
+        
         
     }
 

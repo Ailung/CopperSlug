@@ -2,28 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leg : Weapon
+public class Shotgun : MonoBehaviour,IWeapon
 {
     [SerializeField] private int attackDamage;
     [SerializeField] private int attackSpeed;
     private CharacterController player;
     private bool isAttacking = false;
-    public override int AttackDamage => attackDamage;
+    public int AttackDamage => attackDamage;
 
-    public override int AttackSpeed => attackSpeed;
+    public int AttackSpeed => attackSpeed;
 
-    public override CharacterController Player => player;
-    public override bool IsAttacking => isAttacking;
+    public CharacterController Player => player;
+    public bool IsAttacking => isAttacking;
 
     private void Awake()
     {
         player = this.gameObject.GetComponentInParent<CharacterController>();
     }
-    public override void Attack()
+    public void Attack()
     {
-        isAttacking = true;
-        gameObject.SetActive(true);
-        StartCoroutine(waitToEnd());
+        Debug.Log("Shtgun attack");
     }
 
     IEnumerator waitToEnd()
