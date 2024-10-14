@@ -21,12 +21,19 @@ public class HealthManager : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     public void getHeal(int heal)
     {
-        health += heal;
+        if (health < maxHealth)
+        {
+            health += heal;
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+        }
     }
 }

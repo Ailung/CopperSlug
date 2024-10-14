@@ -11,7 +11,7 @@ public class StateMachine : MonoBehaviour
 
     public Idle idleState;
     public Running runningState;
-    public Punching punchingState;
+    public Shooting shootingState;
     public Kicking kickingState;
     public Chasing chasingState;
     public Jumping jumpingState;
@@ -21,7 +21,7 @@ public class StateMachine : MonoBehaviour
     {
         this.idleState = new Idle(gameObject);
         this.runningState = new Running(gameObject);
-        this.punchingState = new Punching(gameObject);
+        this.shootingState = new Shooting(gameObject);
         this.kickingState = new Kicking(gameObject);
         this.chasingState = new Chasing(gameObject);
         this.jumpingState = new Jumping(gameObject);

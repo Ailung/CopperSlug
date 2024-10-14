@@ -6,13 +6,13 @@ public class Kicking : MonoBehaviour, IState
 {
     private GameObject m_gameObject;
     private CharacterController characterController;
-    private EnemyController enemyController;
+    private CloseEnemy enemyController;
 
     public Kicking(GameObject gameObject)
     {
         m_gameObject = gameObject;
         m_gameObject.TryGetComponent<CharacterController>(out characterController);
-        m_gameObject.TryGetComponent<EnemyController>(out enemyController);
+        m_gameObject.TryGetComponent<CloseEnemy>(out enemyController);
     }
     public void Enter()
     {
