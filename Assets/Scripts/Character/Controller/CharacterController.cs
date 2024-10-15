@@ -126,7 +126,7 @@ public class CharacterController : MonoBehaviour
             if (!isInvencible)
             {
                 GetComponent<HealthManager>().getDamage(collision.gameObject.GetComponent<Bullet>().damage);
-                collision.gameObject.GetComponent<Bullet>().Deactivate();
+                collision.gameObject.SetActive(false);
                 isInvencible = true;
                 GetComponent<SpriteRenderer>().color = Color.red;
             }

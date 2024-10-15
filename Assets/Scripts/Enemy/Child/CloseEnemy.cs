@@ -46,7 +46,7 @@ public class CloseEnemy : Enemy
         if (collision.gameObject.CompareTag("PlayerBullets"))
         {
             GetComponent<HealthManager>().getDamage(collision.GetComponent<Bullet>().damage);
-            collision.gameObject.GetComponent<Bullet>().Deactivate();
+            collision.gameObject.SetActive(false);
         }
     }
 
