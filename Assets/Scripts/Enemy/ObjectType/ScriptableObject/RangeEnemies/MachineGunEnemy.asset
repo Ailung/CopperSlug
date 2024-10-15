@@ -15,7 +15,7 @@ MonoBehaviour:
   speed: 3
   contactDamage: 10
   chaseDistance: 30
-  stopDistance: 5
+  stopDistance: 20
   attackSpeed: 0.5
   attackDamage: 5
   dropId: 

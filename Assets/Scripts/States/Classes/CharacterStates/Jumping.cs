@@ -27,7 +27,7 @@ public class Jumping : MonoBehaviour, IState
 
     public void UpdateState()
     {
-        if (!Input.GetKey(KeyCode.Space) && cancelJump) 
+        if (!Input.GetKey(KeyCode.Space) && cancelJump && characterController.Rb.velocity.y > 0) 
         {
             characterController.Rb.velocity = new Vector2(characterController.Rb.velocity.x,0);
             cancelJump = false;

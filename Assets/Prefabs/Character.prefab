@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1836424473}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  jumpIntensity: 8
+  jumpIntensity: 13
   startWeapon: {fileID: 6146514946353676037, guid: 0e011d1ba861a1d40ac75394f4e7d2df, type: 3}
   weaponPos: {fileID: 8927669807380130325}
   weaponPos2: {fileID: 9010678507735650351}
@@ -153,11 +153,11 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.32097167
+  m_UseAutoMass: 0
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

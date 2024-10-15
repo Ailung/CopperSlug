@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1367552428}
   - component: {fileID: 2248080261210652170}
   - component: {fileID: -5463433880896910951}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PistolEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -152,7 +152,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -178,3 +178,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Pistol
   data: {fileID: 11400000, guid: cb01ec20d8aad9b47a35cf210f9bbd9e, type: 2}
+  dropId: 

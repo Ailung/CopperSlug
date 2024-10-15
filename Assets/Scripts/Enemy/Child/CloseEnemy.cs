@@ -63,7 +63,7 @@ public class CloseEnemy : Enemy
         }
     }
 
-    private void OnDisable()
+    public override void OnDie()
     {
         Drops drop = dropsFactory.Create(dropId);
         if (drop != null)

@@ -76,7 +76,7 @@ public class RangeEnemy : Enemy
         }
     }
 
-    private void OnDisable()
+    public override void OnDie()
     {
         Drops drop = dropsFactory.Create(dropId);
         if (drop != null)
@@ -86,25 +86,42 @@ public class RangeEnemy : Enemy
     }
     public override void StopChasePlayer()
     {
-            if (!isAttacking)
+        if (transform.position.x < player.transform.position.x && isFacingRight)
+        {
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            isFacingRight = false;
+        }
+        else if (transform.position.x > player.transform.position.x && !isFacingRight)
+        {
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            isFacingRight = true;
+        }
+
+        if (!isAttacking)
+        {
+            Bullet bullet = bulletPool.GetBullet();
+
+            bullet.tag = "EnemyBullets";
+
+            bullet.damage = data.attackDamage;
+
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+
+            bullet.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.identity);
+
+            if (transform.position.y < player.transform.position.y)
             {
-                Bullet bullet = bulletPool.GetBullet();
-
-                bullet.tag = "EnemyBullets";
-
-                bullet.damage = data.attackDamage;
-
-                bullet.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-
-                bullet.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.identity);
-
+                bullet.GetComponent<Rigidbody2D>().AddForce(gameObject.transform.up *10, ForceMode2D.Impulse);
+            } else
+            {
                 bullet.GetComponent<Rigidbody2D>().AddForce(gameObject.transform.right * gameObject.GetComponentInParent<Transform>(false).lossyScale.x * 20, ForceMode2D.Impulse);
-
-                isAttacking = true;
-
-                timerShoot = 0;
             }
+
+            isAttacking = true;
+
+            timerShoot = 0;
+        }
 
     }
 

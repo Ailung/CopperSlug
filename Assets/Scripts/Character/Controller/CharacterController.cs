@@ -7,9 +7,12 @@ public class CharacterController : MonoBehaviour
 {
     [SerializeField] private int speed = 3;
     [SerializeField] private int jumpIntensity = 3;
+    [SerializeField] private float invencibleTime = 3;
 
     private bool isFacingRight = true;
     private bool isFacingUp = false;
+    private bool isInvencible = false;
+    private float timerInvencible = 0;
     private StateMachine playerStateMachine;
     private Rigidbody2D rb;
     private MeshRenderer mr;
@@ -44,6 +47,8 @@ public class CharacterController : MonoBehaviour
 
         currentWeapon.transform.SetParent(this.transform);
         currentWeapon.transform.position = weaponPos.transform.position;
+
+        GameManager.Instance.SetCharacter(this);
         
     }
 
@@ -90,6 +95,18 @@ public class CharacterController : MonoBehaviour
         {
             ResetWeapon();
         }
+
+        if (isInvencible && timerInvencible < invencibleTime) 
+        {
+            timerInvencible += Time.deltaTime;
+        }
+
+        if (timerInvencible >= invencibleTime) 
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+            isInvencible = false;
+            timerInvencible = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -106,8 +123,13 @@ public class CharacterController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("EnemyBullets"))
         {
-            GetComponent<HealthManager>().getDamage(collision.gameObject.GetComponent<Bullet>().damage);
-            collision.gameObject.GetComponent<Bullet>().Deactivate();
+            if (!isInvencible)
+            {
+                GetComponent<HealthManager>().getDamage(collision.gameObject.GetComponent<Bullet>().damage);
+                collision.gameObject.GetComponent<Bullet>().Deactivate();
+                isInvencible = true;
+                GetComponent<SpriteRenderer>().color = Color.red;
+            }
         }
     }
 
@@ -120,7 +142,12 @@ public class CharacterController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            GetComponent<HealthManager>().getDamage(collision.gameObject.GetComponent<Enemy>().ContactDamage);
+            if (!isInvencible)
+            {
+                GetComponent<HealthManager>().getDamage(collision.gameObject.GetComponent<Enemy>().ContactDamage);
+                isInvencible = true;
+                GetComponent<SpriteRenderer>().color = Color.red;
+            }
         }
     }
 

@@ -16,4 +16,6 @@ public abstract class Enemy : MonoBehaviour
     public abstract void StopChasePlayer();
 
     public abstract void ChasePlayer();
+
+    public abstract void OnDie();
 }
